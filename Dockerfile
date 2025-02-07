@@ -1,18 +1,7 @@
-FROM python:3.8-alpine
-
-# copy the requirements file into the image
-COPY ./requirements.txt /app/requirements.txt
-
-# switch working directory
+FROM python:3.9-slim
 WORKDIR /app
-
-# install the dependencies and packages in the requirements file
+COPY requirements.txt /app/
 RUN pip install -r requirements.txt
-
-# copy every content from the local file to the image
-COPY . /app
-
-# configure the container to run in an executed manner
-ENTRYPOINT [ "python" ]
-
-CMD ["app.py" ]
+COPY . /app/
+EXPOSE 5000
+CMD ["python", "app.py"]
